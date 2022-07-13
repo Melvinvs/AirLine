@@ -1,4 +1,5 @@
-﻿using AirLine.Models;
+﻿using AirLine.Interface;
+using AirLine.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +12,11 @@ namespace AirLine.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IFlightService _flight;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IFlightService flight)
         {
-            _logger = logger;
+            this._flight = flight;
         }
 
         public IActionResult Index()
@@ -32,6 +33,12 @@ namespace AirLine.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("Flight/Name")]
+        public string GetName()
+        {
+            return _flight.GetFlightDetails(1).AirLineName;
         }
     }
 }
