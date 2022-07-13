@@ -23,12 +23,6 @@ namespace AirLine.Controllers
             return View();
         }
 
-        //[Route("z/c")]
-        public string ch()
-        {
-            return "check";
-        }
-
         public IActionResult Privacy()
         {
             return View();
