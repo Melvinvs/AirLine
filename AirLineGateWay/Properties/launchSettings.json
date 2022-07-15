@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:44117",
-      "sslPort": 44366
+      "applicationUrl": "http://localhost:6280",
+      "sslPort": 44308
     }
   },
   "profiles": {
-    "LoginService": {
+    "AirLineGateWay": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7200;http://localhost:5200",
+      "applicationUrl": "https://localhost:7024;http://localhost:5024",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,4 +1,4 @@
-namespace BookingService
+namespace AirLineGateWay
 {
     public class WeatherForecast
     {

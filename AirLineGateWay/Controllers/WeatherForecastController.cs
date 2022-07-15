@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookingService.Controllers
+namespace AirLineGateWay.Controllers
 {
     [ApiController]
     [Route("[controller]")]
