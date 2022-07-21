@@ -1,7 +1,8 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/Login",
+      //"UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Login/{method}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +10,16 @@
           "Port": 7200
         }
       ],
-      "UpstreamPathTemplate": "/GateWay/Login",
+      //"ServiceName": "LoginService",
+      //"LoadBalancerOptions": {
+      //  "Type" :  "LeastConnection"
+      //},
+      "UpstreamPathTemplate": "/Login/{method}",
+      //"ReRouteCaseSensitive": false,
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/Booking",
+      "DownstreamPathTemplate": "/api/Booking/{method}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,11 +27,11 @@
           "Port": 7099
         }
       ],
-      "UpstreamPathTemplate": "/GateWay/Booking",
+      "UpstreamPathTemplate": "/Booking/{method}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/Flight",
+      "DownstreamPathTemplate": "/api/Flight/{method}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -33,7 +39,7 @@
           "Port": 7039
         }
       ],
-      "UpstreamPathTemplate": "/GateWay/Admin",
+      "UpstreamPathTemplate": "/Flight/{method}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],

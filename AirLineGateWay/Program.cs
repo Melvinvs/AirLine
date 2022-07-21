@@ -1,3 +1,4 @@
+using AirLineGateWay.Config;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Serilog;
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("ocelot.json");
 builder.Services.AddOcelot();
+builder.Services.AddConsulConfig();
 
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -31,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseConsul();
 
 app.UseOcelot().Wait();
 
