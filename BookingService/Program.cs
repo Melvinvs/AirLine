@@ -1,3 +1,4 @@
+using BookingService.Config;
 using BookingService.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddConsulConfig();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseConsul();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

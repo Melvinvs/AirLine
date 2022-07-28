@@ -1,7 +1,7 @@
 ﻿using Consul;
 using IApplicationLifetime = Microsoft.Extensions.Hosting.IApplicationLifetime;
 
-namespace LoginService.Config
+namespace FlightService.Config
 {
     public static class ServiceRegisterAppExtension
     {
@@ -25,10 +25,10 @@ namespace LoginService.Config
 
             var registration = new AgentServiceRegistration()
             {
-                ID = "LoginService1",
-                Name = "LoginService",
+                ID = "FlightService1",
+                Name = "FlightService",
                 Address = "localhost",
-                Port = 7200
+                Port = 7038
             };
 
             logger.LogInformation("Registering consul");

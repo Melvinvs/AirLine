@@ -1,3 +1,4 @@
+using FlightService.Config;
 using FlightService.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+builder.Services.AddConsulConfig();
 
 var app = builder.Build();
 
@@ -39,6 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseConsul();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,50 +1,79 @@
 {
   "Routes": [
     {
-      //"UseServiceDiscovery": true,
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Login/{method}",
       "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7200
-        }
-      ],
-      //"ServiceName": "LoginService",
-      //"LoadBalancerOptions": {
-      //  "Type" :  "LeastConnection"
-      //},
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7200
+      //  }
+      //],      
       "UpstreamPathTemplate": "/Login/{method}",
-      //"ReRouteCaseSensitive": false,
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ServiceName": "LoginService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "ReRoutesCaseSensitive": false
     },
     {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Booking/{method}",
       "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7099
-        }
-      ],
       "UpstreamPathTemplate": "/Booking/{method}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ServiceName": "BookingService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "ReRoutesCaseSensitive": false
     },
     {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Flight/{method}",
       "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7039
-        }
-      ],
       "UpstreamPathTemplate": "/Flight/{method}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ServiceName": "FlightService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "ReRoutesCaseSensitive": false
     }
+    //{
+    //  "DownstreamPathTemplate": "/api/Booking/{method}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7099
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/Booking/{method}",
+    //  "UpstreamHttpMethod": [ "Get", "Post" ]
+    //},
+    //{
+    //  "DownstreamPathTemplate": "/api/Flight/{method}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7039
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/Flight/{method}",
+    //  "UpstreamHttpMethod": [ "Get", "Post" ]
+    //}
   ],
   "GlobalConfiguration": {
-    "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
+    //"RequestIdKey": "OcRequestId",
+    //"AdministrationPath": "/administration"
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }

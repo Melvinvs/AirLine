@@ -1,7 +1,9 @@
 using AirLineGateWay.Config;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 using Serilog;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +15,10 @@ builder.Services.AddMvc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddConsulConfig();
 builder.Configuration.AddJsonFile("ocelot.json");
-builder.Services.AddOcelot();
-builder.Services.AddConsulConfig();
+builder.Services.AddOcelot().AddConsul();
+
 
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -34,7 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseConsul();
+//app.UseConsul();
 
 app.UseOcelot().Wait();
 
