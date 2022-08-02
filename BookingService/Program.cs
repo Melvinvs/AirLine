@@ -3,6 +3,7 @@ using BookingService.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,3 +52,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

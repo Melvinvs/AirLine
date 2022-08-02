@@ -47,5 +47,21 @@ namespace BookingService.Entity
 
             return obj;
         }
+
+        public bool CancelTicketByFlightID(Ticket model)
+        {
+            List<Ticket> obj = db.Bookings.Where(f => f.FlightNo == model.FlightNo && f.FromPlace == model.FromPlace && f.StartTime == model.StartTime).ToList();
+
+            foreach(var ticket in obj)
+            {
+                ticket.IsCancelled = 1;
+            }
+
+            //db.Update(obj);
+            db.Bookings.UpdateRange(obj);
+            db.SaveChanges();
+
+            return obj.Count > 0 ? true : false;
+        }
     }
 }

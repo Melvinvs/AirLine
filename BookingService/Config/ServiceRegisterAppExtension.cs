@@ -28,7 +28,7 @@ namespace BookingService.Config
                 ID = "BookingService1",
                 Name = "BookingService",
                 Address = "localhost",
-                Port = 7099
+                Port = 7098
             };
 
             logger.LogInformation("Registering consul");

@@ -1,0 +1,11 @@
+.login-container{
+    text-align: center;
+}
+
+.login-heading{
+    color: #0b7bef;
+}
+
+.error-msg{
+    color: red;
+}

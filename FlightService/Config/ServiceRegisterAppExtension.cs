@@ -28,7 +28,7 @@ namespace FlightService.Config
                 ID = "FlightService1",
                 Name = "FlightService",
                 Address = "localhost",
-                Port = 7038
+                Port = 7039
             };
 
             logger.LogInformation("Registering consul");

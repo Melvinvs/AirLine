@@ -24,7 +24,7 @@ namespace LoginService.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<String>> Register(string name, string password)
+        public async Task<ActionResult<bool>> Register(string name, string password)
         {
             CreatePasswordHash(password, out byte[] hash, out byte[] salt);
 
@@ -37,7 +37,9 @@ namespace LoginService.Controllers
 
             user = _login.Register(user);
 
-            return Ok("Registered User Successfully");
+            var status = user != null && user.Id > 0 ? true : false;
+
+            return Ok(status);
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -50,47 +52,28 @@ namespace LoginService.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(string name, string password)
+        public async Task<ActionResult<UserModel>> Login(string name, string password)
         {
             User user = _login.GetUser(name);
-            string token = "";
+            UserModel userData = new UserModel();
 
-            if (!String.IsNullOrEmpty(name) && name == user.UserName && VerifyPassword(password, user.PasswordSalt, user.Password))
+            if (user != null && !String.IsNullOrEmpty(name) && name == user.UserName && VerifyPassword(password, user.PasswordSalt, user.Password))
             {
                 var refreshtoken = GenerateRefreshToken();
                 SetRefreshToken(refreshtoken);
-                token = CreateJWTToken(name, user.RoleType);
-            }
-            else
-            {
-                return BadRequest("UserName or password incorrect");
+                userData.refreshToken = CreateJWTToken(name, user.RoleType);
+                userData.RoleType = user.RoleType;
             }
 
-            if (string.IsNullOrEmpty(token))
-            {
-                return BadRequest("UserName or password incorrect");
-
-            }
-            else
-            {
-                if(user.RoleType == 0)
-                {
-                    return Ok("Normal user page. Token:" + token);
-                }
-                else
-                {
-                    return Ok("Admin user page. Token:" + token);
-                }
-            }
-            //return Ok(Redirect("https://localhost:7024"));
+            return Ok(userData);
         }
 
         [HttpGet("logout")]
-        public async Task<ActionResult<string>> Logout()
+        public async Task<ActionResult<bool>> Logout()
         {
             Response.Cookies.Delete("refreshToken")
 ;
-            return Ok("Logged out");
+            return Ok(true);
         }
 
         private bool VerifyPassword(string password, byte[] salt, byte[] currentPassword)

@@ -1,0 +1,21 @@
+<div class="login-container">
+    <h2 class="login-heading">Register</h2>
+    <div class="mt-4">
+        
+        <form #Registerform="ngForm" (ngSubmit)="registerformSubmit(Registerform.value)">
+            
+            <div class="form-outline mb-4">
+                <input type="text" #txtUserName name="userName" placeholder="User name" ngModel>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input #pwdPassword type="password" name="password" placeholder="password" ngModel>
+            </div>
+
+            <input class="btn btn-primary btn-block mb-4" type="submit" value="Register">
+
+        </form>
+    </div>
+</div>
+
+status :{{registerStatus}}

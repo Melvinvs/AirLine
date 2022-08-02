@@ -7,6 +7,15 @@ using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "_myAllowSpecificOrigins",
+                      policy =>
+                      {
+                          policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                      });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -38,7 +47,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseConsul();
-
+app.UseCors("_myAllowSpecificOrigins");
 app.UseOcelot().Wait();
 
 app.UseHttpsRedirection();

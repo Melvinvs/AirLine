@@ -1,0 +1,16 @@
+.user-container{
+    text-align: center;
+}
+
+.table-list{
+    border: black;
+    border-width: 1px;
+}
+th{
+    margin: 5px;
+    border-width: 10px;
+}
+
+td{
+   border: 3px; 
+}

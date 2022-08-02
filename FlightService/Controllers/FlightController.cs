@@ -2,6 +2,9 @@
 using FlightService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace FlightService.Controllers
 {
@@ -16,8 +19,9 @@ namespace FlightService.Controllers
             this._flight = flight;
         }
 
-        [HttpPost("addflight"), Authorize(Roles = "Admin")]
-        public async Task<ActionResult<String>> AddFlight(FlightModel model)
+        //[HttpPost("addflight"), Authorize(Roles = "Admin")]
+        [HttpPost("addflight")]
+        public async Task<ActionResult<bool>> AddFlight(FlightModel model)
         {
             var domain = new Flight
             {
@@ -32,7 +36,7 @@ namespace FlightService.Controllers
 
             Flight flight = _flight.AddFlight(domain);
 
-            return Ok("Added flight Successfully");
+            return Ok(true);
         }
 
         [HttpPost("flights")]
@@ -47,6 +51,26 @@ namespace FlightService.Controllers
         public async Task<ActionResult<Flight>> blockflights(int id)
         {
             Flight flights = _flight.BlockFlight(id);
+
+            var factory = new ConnectionFactory
+            {
+                Uri = new Uri("amqp://guest:guest@localhost:5672")
+            };
+
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            channel.QueueDeclare("blockflights",
+                durable: true,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null
+                );
+
+            var message = new { name = "blockflights", FlightNo = flights.FlightNo, FromPlace = flights.FromPlace, StartTime = flights.StartTime };
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+
+            channel.BasicPublish("", "blockflights", null, body);
 
             return Ok(flights);
         }

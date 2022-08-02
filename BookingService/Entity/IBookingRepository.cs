@@ -13,5 +13,7 @@ namespace BookingService.Entity
         Ticket SearchByPNR(string PNR);
 
         Ticket CancelTicket(string PNR);
+
+        bool CancelTicketByFlightID(Ticket model);
     }
 }

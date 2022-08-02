@@ -1,0 +1,34 @@
+<h2 class="admin-head">Admin Menu</h2>
+
+<div class="row col-12"> 
+    <div (click)="adminOption=$any('ManageSchedule')" class="col-3">
+        Manage Schedule
+    </div>
+    <div  (click)="adminOption=$any('manageDiscount')" class="col-3">
+        Manage Discount
+    </div>
+    <div (click)="adminOption=$any('manageAirline')" class="col-3">
+        Manage Airline
+    </div>
+    <div (click)="adminOption=$any('Reports')" class="col-3">
+        Reports
+    </div>
+</div>
+
+<div [ngSwitch]="adminOption">
+    <div *ngSwitchCase="'ManageSchedule'">
+        <h3>Manage Schedule</h3>        
+    </div>
+    <div *ngSwitchCase="'manageDiscount'">
+        <h3>Manage Discount</h3>        
+    </div>
+    <div *ngSwitchCase="'manageAirline'">
+        <app-add-airline></app-add-airline>
+    </div>
+    <div *ngSwitchCase="'Reports'">
+        <h3>User 2</h3>        
+    </div>
+    <div *ngSwitchDefault>
+           
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="user-container">
+    <h2>Search Flights</h2>
+
+    <div class="search-area" >
+        <div >
+            <form class="row " #searchForm="ngForm" (ngSubmit)="searchformSubmit(searchForm.value)">
+                <div class="ml-2 form-outline mb-4">
+                    <input #pwdPassword type="text" name="Departure" placeholder="Departure" ngModel>
+                </div>
+                <div class="ml-2 form-outline mb-4">
+                    <input #pwdPassword type="text" name="Destination" placeholder="Destination" ngModel>
+                </div>
+            
+                <div class="ml-2 form-outline mb-4">
+                    <input  type="date" name="StartTime" placeholder="Start Time" ngModel>
+                </div>
+
+                <input class="btn btn-primary btn-block mb-4" type="submit" value="search">
+            </form>
+        </div>
+    </div>
+
+    <div class="list-area">
+
+        <table class="table-list">
+
+            <thead>
+                <th>
+                    Flight No.
+                </th>
+                <th>
+                    Airline Name
+                </th>
+                <th>
+                    From
+                </th>
+                <th>
+                    To
+                </th>
+                <th>
+                    StartTime
+                </th>
+                <th>
+                    EndTime
+                </th>
+                <th>
+                    Price
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let flight of flights">
+                    <td>
+                        {{flight.flightNo}}
+                    </td>
+                    <td>
+                        {{flight.airLineName}}
+                    </td>
+                    <td>
+                        {{flight.fromPlace}}
+                    </td>
+                    <td>
+                        {{flight.toPlace}}
+                    </td>
+                    <td>
+                        {{flight.startTime|date:'medium'}}
+                    </td>
+                    <td>
+                        {{flight.endTime|date:'medium'}}
+                    </td>
+                    <td>
+                        {{flight.ticketPrice}}
+                    </td>
+                </tr>
+            </tbody>
+                
+            
+        </table>
+
+    </div>
+
+</div>
