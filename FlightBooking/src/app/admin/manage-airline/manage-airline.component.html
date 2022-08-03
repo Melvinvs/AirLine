@@ -1,0 +1,28 @@
+<app-add-airline></app-add-airline>
+
+
+<div>
+    <h3>Airline List</h3>
+
+    <div>
+        <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">AirLine Name</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Contact Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of Airlines">
+                <td>{{i.airlineName}}</td>
+                <td>{{i.contactNumber}}</td>
+                <td>{{i.contactAddress}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+

@@ -1,4 +1,5 @@
 ﻿using FlightService.Entity;
+using FlightService.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlightService.Entity
@@ -16,6 +17,8 @@ namespace FlightService.Entity
         }
 
         public DbSet<Flight> Flight { get; set; }
+
+        public DbSet<AirLineModel> AirLine { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

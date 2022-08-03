@@ -1,0 +1,80 @@
+<div class="add-airline-container mt-5">
+    <h3>Add Airline</h3>
+
+    <form class="row" #loginForm="ngForm" (ngSubmit)="addAirlineormSubmit(loginForm.value)">
+                
+        <div class="ml-2 form-outline mb-4">
+            <input type="text" #txtUserName name="flightNo" placeholder="Flight number" ngModel>
+        </div>
+    
+        <div class="ml-2 form-outline mb-4">
+            <label>Select Schedule Timing</label>
+            <br>
+            <input type="hidden" name="airLineName" value="{{airlineName}}" ngModel>
+            <select (change)="airlineNameSelect($event)">
+                <option value="none" selected disabled hidden>Select an Option</option>
+                <option *ngFor='let i of Airlines' value="i.airlineName">{{i.airlineName}}</option>
+                
+            </select>
+        </div>
+
+
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="fromPlace" placeholder="Departure" ngModel>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="toPlace" placeholder="Destination" ngModel>
+        </div>
+    
+        <!-- <div class="ml-2 form-outline mb-4">
+            <input  type="datetime-local" name="StartTime" placeholder="Start Time" ngModel>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input type="datetime-local" name="EndTime" placeholder="End Time" ngModel>
+        </div>
+    
+        <div class="ml-2 form-outline mb-4">
+            <label>Select Schedule Timing</label>
+            <br>
+            <input type="hidden" name="scheduleType" value="{{scheduleType}}" ngModel>
+            <select (change)="ScheduleTypeSelect($event)">
+                <option value="1">Daily</option>
+                <option value="2">Week Days</option>
+                <option value="3">Week Ends</option>
+            </select>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="PlaneNumber" placeholder="Plane Number" ngModel>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="BussinessSeatNo" placeholder="Bussiness Seat No" ngModel>
+        </div>
+    
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="EconomySeatNo" placeholder="Economy Seat No" ngModel>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="Prize" placeholder="Prize" ngModel>
+        </div>
+        <div class="ml-2 form-outline mb-4">
+            <input #pwdPassword type="text" name="Rows" placeholder="Rows" ngModel>
+        </div>
+    
+        <div class="ml-2 form-outline mb-4">
+            <label>Select Meal Type</label>
+            <br>
+            <input type="hidden" name="mealType" value="{{mealType}}" ngModel>
+            <select (change)="MealTypeSelect($event)">
+                <option value="0">none</option>
+                <option value="1">veg</option>
+                <option value="2">Non-Veg</option>
+            </select>
+        </div> -->
+    
+    
+    
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Add">
+        
+    </form>
+</div>
+

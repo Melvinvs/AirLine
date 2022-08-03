@@ -1,4 +1,5 @@
 ﻿using FlightService.Entity;
+using FlightService.Models;
 
 namespace FlightService.Entity
 {
@@ -11,5 +12,9 @@ namespace FlightService.Entity
         Flight BlockFlight(int id);
 
         Flight adddiscount(int id, int value);
+
+        bool AddAirLine(AirLineModel model);
+
+        List<AirLineModel> GetAllAirline();
     }
 }

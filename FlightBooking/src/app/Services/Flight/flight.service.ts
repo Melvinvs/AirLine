@@ -1,32 +1,61 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Flight} from '../../Models/Flight';
+import { CookieService } from 'ngx-cookie-service';
+import {IAirline} from '../../Interface/AirlineModel';
+import { IFlight } from 'src/app/Interface/FlightModel';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class FlightService {
   baseUrl:string;
   url:string;
+  token:string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _cookie:CookieService) {
     this.baseUrl = 'https://localhost:7024/Flight/';
     this.url = '';
    }
 
-   addFlight(model:Flight): Observable<any> {
+   AddAirLine(model:IAirline): Observable<any> {
    
-      this.url = this.baseUrl + 'addflight'  ;    
-    console.log(this.url);
-    console.log(model);
-    return this.http.post(this.url,JSON.stringify(model))
+    this.url = this.baseUrl + 'addairline'  ;    
+    this.token= this._cookie.get('token')
+
+   let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+                                  .set('Content-Type', 'application/json');
+
+    return this.http.post(this.url,model, {headers:header});
+  }
+
+  GetAllAirLine():Observable<any>{
+    this.url = this.baseUrl + 'getallairline'  ;    
+    this.token= this._cookie.get('token')
+
+    let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+                                  .set('Content-Type', 'application/json');
+
+    return this.http.get(this.url, {headers:header})
+  }
+
+  addFlight(model:IFlight): Observable<any> {
+   
+    this.url = this.baseUrl + 'addflight'  ;    
+    this.token= this._cookie.get('token')
+    console.log(model, this.token)
+    let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+                                  .set('Content-Type', 'application/json');
+
+    return this.http.post(this.url,model, {headers:header});
   }
 
   search(from:string, to:string, starttime:Date): Observable<any> {
    
-  this.url = this.baseUrl + 'flights?from=del&to=mum'  ;    
-  console.log(this.url);
-  return this.http.post(this.url,'')
-}
+    this.url = this.baseUrl + 'flights?from=del&to=mum'  ;    
+    console.log(this.url);
+    return this.http.post(this.url,'')
+  }
 }

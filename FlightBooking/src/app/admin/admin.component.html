@@ -17,13 +17,13 @@
 
 <div [ngSwitch]="adminOption">
     <div *ngSwitchCase="'ManageSchedule'">
-        <h3>Manage Schedule</h3>        
+        <app-schedule-airline></app-schedule-airline>  
     </div>
     <div *ngSwitchCase="'manageDiscount'">
         <h3>Manage Discount</h3>        
     </div>
     <div *ngSwitchCase="'manageAirline'">
-        <app-add-airline></app-add-airline>
+        <app-manage-airline></app-manage-airline>
     </div>
     <div *ngSwitchCase="'Reports'">
         <h3>User 2</h3>        

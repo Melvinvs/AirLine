@@ -1,4 +1,5 @@
 ﻿using FlightService.Entity;
+using FlightService.Models;
 
 namespace FlightService.Entity
 {
@@ -44,6 +45,19 @@ namespace FlightService.Entity
             db.SaveChanges();
 
             return obj;
+        }
+
+        public bool AddAirLine(AirLineModel model)
+        {
+            db.AirLine.Add(model);
+            db.SaveChanges();
+
+            return true;
+        }
+
+        public List<AirLineModel> GetAllAirline()
+        {
+            return db.AirLine.ToList();
         }
     }
 }

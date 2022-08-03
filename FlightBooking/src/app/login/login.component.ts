@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../UserService/user-service.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { UserServiceService } from '../UserService/user-service.service';
 })
 export class LoginComponent implements OnInit {
   errorMessage:string = '';
-  constructor(private _router: Router, private _user: UserServiceService) { }
+  constructor(private _router: Router, private _user: UserServiceService, private _cookie:CookieService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this._user.login(data.userName, data.password)
     .subscribe((result) => {
       if(result.refreshToken != undefined && result.refreshToken != "" && result.refreshToken != null){
-        console.log(result)
+        this._cookie.set('token', result.refreshToken)
         if(result.roleType == 1){
 
           this._router.navigateByUrl('/admin')

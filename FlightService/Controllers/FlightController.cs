@@ -19,8 +19,7 @@ namespace FlightService.Controllers
             this._flight = flight;
         }
 
-        //[HttpPost("addflight"), Authorize(Roles = "Admin")]
-        [HttpPost("addflight")]
+        [HttpPost("addflight"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<bool>> AddFlight(FlightModel model)
         {
             var domain = new Flight
@@ -81,6 +80,20 @@ namespace FlightService.Controllers
             Flight flights = _flight.adddiscount(id, value);
 
             return Ok(flights);
+        }
+
+        [HttpPost("addairline"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<bool>> AddAirLine(AirLineModel model)
+        {
+            var status = _flight.AddAirLine(model);
+
+            return Ok(status);
+        }
+
+        [HttpGet("getallairline"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<List<AirLineModel>>> GetAllAirline()
+        {
+            return Ok(_flight.GetAllAirline());
         }
     }
 }
