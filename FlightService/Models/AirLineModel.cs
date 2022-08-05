@@ -9,5 +9,7 @@
         public string ContactNumber { get; set; }
 
         public string ContactAddress { get; set; }
+
+        public bool IsBlocked { get; set; }
     }
 }

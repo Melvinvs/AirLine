@@ -63,6 +63,7 @@ namespace LoginService.Controllers
                 SetRefreshToken(refreshtoken);
                 userData.refreshToken = CreateJWTToken(name, user.RoleType);
                 userData.RoleType = user.RoleType;
+                userData.id = user.Id;
             }
 
             return Ok(userData);

@@ -9,6 +9,7 @@ import { FlightService } from 'src/app/Services/Flight/flight.service';
 })
 export class ManageAirlineComponent implements OnInit {
   Airlines:IAirline[] = []
+  ManageScheduleOptions:number = 0;
   constructor(private _flight: FlightService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,15 @@ export class ManageAirlineComponent implements OnInit {
     .subscribe((result) => {
       
        this.Airlines=result;
+       console.log(this.Airlines)
+    })
+  }
+
+  BlockAirline(id:number){
+    this._flight.BlockAirline(id)
+    .subscribe((result) => {
+      
+      this.loadAirLineList()
     })
   }
 

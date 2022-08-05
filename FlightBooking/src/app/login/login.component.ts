@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../UserService/user-service.service';
+import { UserServiceService } from '../Services/UserService/user-service.service';
 import { CookieService } from 'ngx-cookie-service';
+import { GlobalComponent } from '../GlobalComponent';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,10 @@ export class LoginComponent implements OnInit {
     .subscribe((result) => {
       if(result.refreshToken != undefined && result.refreshToken != "" && result.refreshToken != null){
         this._cookie.set('token', result.refreshToken)
+        
+        GlobalComponent.loggedUserId = result.id
+        
+        AppComponent.isLoggedIn = true
         if(result.roleType == 1){
 
           this._router.navigateByUrl('/admin')
@@ -35,5 +41,4 @@ export class LoginComponent implements OnInit {
     })
     
   }
-
 }

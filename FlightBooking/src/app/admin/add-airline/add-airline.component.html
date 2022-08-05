@@ -1,18 +1,18 @@
 <div class="add-airline-container mt-5">
-    <h3>Add Airline</h3>
+    <h2 class="text-center">Add Airline</h2>
 
     <form class="row" #loginForm="ngForm" (ngSubmit)="addAirlineormSubmit(loginForm.value, loginForm)">
        
         <div class="ml-2 form-outline mb-4">
-            <input id="airlineName" type="text" name="airlineName" placeholder="Airline Name" ngModel>
+            <input class="form-control" id="airlineName" type="text" name="airlineName" placeholder="Airline Name" ngModel>
         </div>
 
         <div class="ml-2 form-outline mb-4">
-            <input id="contactNumber" type="text" name="contactNumber" placeholder="Contact Number" ngModel>
+            <input class="form-control" id="contactNumber" type="text" name="contactNumber" placeholder="Contact Number" ngModel>
         </div>
        
         <div class="ml-2 form-outline mb-4">
-            <input id="contactAddress" type="text" name="contactAddress" placeholder="Contact Address" ngModel>
+            <input class="form-control" id="contactAddress" type="text" name="contactAddress" placeholder="Contact Address" ngModel>
         </div>
         
     

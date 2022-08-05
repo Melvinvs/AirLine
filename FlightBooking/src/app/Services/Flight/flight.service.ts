@@ -25,7 +25,7 @@ export class FlightService {
     this.url = this.baseUrl + 'addairline'  ;    
     this.token= this._cookie.get('token')
 
-   let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+    let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
                                   .set('Content-Type', 'application/json');
 
     return this.http.post(this.url,model, {headers:header});
@@ -53,9 +53,31 @@ export class FlightService {
   }
 
   search(from:string, to:string, starttime:Date): Observable<any> {
-   
-    this.url = this.baseUrl + 'flights?from=del&to=mum'  ;    
+   console.log(starttime)
+    this.url = this.baseUrl + 'flights?from='+ from +'&to=' + to + '&date=' + starttime ;    
     console.log(this.url);
     return this.http.post(this.url,'')
+  }
+
+  BlockAirline(id:number): Observable<any> {
+   
+    this.url = this.baseUrl + 'blockAirline?id=' + id ;    
+    this.token= this._cookie.get('token')
+
+    let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+                                  .set('Content-Type', 'application/json');
+
+    return this.http.post(this.url,'', {headers:header});
+  }
+
+  AddDiscount(airlinename:string, value:number): Observable<any> {
+   
+    this.url = this.baseUrl + 'adddiscount?name=' + airlinename+ '&value=' + value ;    
+    this.token= this._cookie.get('token')
+
+    let header = new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+                                  .set('Content-Type', 'application/json');
+
+    return this.http.post(this.url,'', {headers:header});
   }
 }

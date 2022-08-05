@@ -16,20 +16,6 @@
         public string AirLineName { get; set; }
         #endregion
 
-        #region ContactNo
-        /// <summary>
-        /// Contact Number
-        /// </summary>
-        public string ContactNo { get; set; }
-        #endregion
-
-        #region ContactAddress
-        /// <summary>
-        /// Contact Address
-        /// </summary>
-        public string ContactAddress { get; set; }
-        #endregion
-
         #region FromPlace
         /// <summary>
         /// FromPlace
@@ -48,14 +34,14 @@
         /// <summary>
         /// StartTime
         /// </summary>
-        public DateTime StartTime { get; set; }
+        public string StartTime { get; set; }
         #endregion
 
         #region EndTime
         /// <summary>
         /// EndTime
         /// </summary>
-        public DateTime EndTime { get; set; }
+        public string EndTime { get; set; }
         #endregion
 
         #region ScheduledType

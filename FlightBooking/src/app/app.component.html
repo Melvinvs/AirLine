@@ -1,16 +1,22 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
+  <a href="/user"><img
     width="40"
     alt="Angular Logo"
     src="../assets/Images/flight.png"
-  />
+  /></a>
   <span>Flight Bokking</span>
     <div class="spacer"></div>
-    <a class="logout" aria-label="Logout"  rel="noopener" href="" title="Logout">
+    <a *ngIf="isLoggedIn==true;else Login" class="logout" (click)="onLogout()" aria-label="Logout"  rel="noopener" href="" title="Logout">
       Logout
     </a>
+
+    <ng-template #Login>
+      <a class="logout"  aria-label="Logout"  rel="noopener" href="/login" title="Login">
+        Login
+      </a>
+    </ng-template>
     
 </div>
 

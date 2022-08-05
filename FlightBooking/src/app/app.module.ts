@@ -15,6 +15,11 @@ import { AddAirlineComponent } from './admin/add-airline/add-airline.component';
 import { ManageAirlineComponent } from './admin/manage-airline/manage-airline.component';
 import { ScheduleAirlineComponent } from './admin/schedule-airline/schedule-airline.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ManageDiscountComponent } from './admin/manage-discount/manage-discount.component';
+import { AddPassengerComponent } from './user/add-passenger/add-passenger.component';
+import { environment } from 'src/environments/environment';
+import { ListBookedTicketsComponent } from './user/list-booked-tickets/list-booked-tickets.component';
+import { SerarchByPnrEmailComponent } from './user/serarch-by-pnr-email/serarch-by-pnr-email.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ErrorComponent,
     AddAirlineComponent,
     ManageAirlineComponent,
-    ScheduleAirlineComponent
+    ScheduleAirlineComponent,
+    ManageDiscountComponent,
+    AddPassengerComponent,
+    ListBookedTicketsComponent,
+    SerarchByPnrEmailComponent
   ],
   imports: [
     BrowserModule,

@@ -82,7 +82,7 @@ namespace FlightService.Entity
         /// <summary>
         /// PlaneNo
         /// </summary>
-        public string PlaneNo { get; set; }
+        public string? PlaneNo { get; set; }
         #endregion
 
         #region BussinesSeatNo

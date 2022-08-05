@@ -1,80 +1,148 @@
-<div class="add-airline-container mt-5">
-    <h3>Add Airline</h3>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Schedule Menu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <div (click)="ManageScheduleOptions=$any(0)" class="col-3">
+                    Add Schedule
+                </div>
+            </li>
+            <!-- <li class="nav-item">
+                <div  (click)="ManageScheduleOptions=$any(1)" class="col-3">
+                    List Schedule
+                </div>
+            </li> -->
+        </ul>
+    </div>
+  </nav>
 
-    <form class="row" #loginForm="ngForm" (ngSubmit)="addAirlineormSubmit(loginForm.value)">
-                
-        <div class="ml-2 form-outline mb-4">
-            <input type="text" #txtUserName name="flightNo" placeholder="Flight number" ngModel>
-        </div>
-    
-        <div class="ml-2 form-outline mb-4">
-            <label>Select Schedule Timing</label>
-            <br>
-            <input type="hidden" name="airLineName" value="{{airlineName}}" ngModel>
-            <select (change)="airlineNameSelect($event)">
-                <option value="none" selected disabled hidden>Select an Option</option>
-                <option *ngFor='let i of Airlines' value="i.airlineName">{{i.airlineName}}</option>
-                
-            </select>
-        </div>
+<div *ngIf="ManageScheduleOptions==0;then AddSchedule;else ListSchedule">
 
-
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="fromPlace" placeholder="Departure" ngModel>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="toPlace" placeholder="Destination" ngModel>
-        </div>
-    
-        <!-- <div class="ml-2 form-outline mb-4">
-            <input  type="datetime-local" name="StartTime" placeholder="Start Time" ngModel>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input type="datetime-local" name="EndTime" placeholder="End Time" ngModel>
-        </div>
-    
-        <div class="ml-2 form-outline mb-4">
-            <label>Select Schedule Timing</label>
-            <br>
-            <input type="hidden" name="scheduleType" value="{{scheduleType}}" ngModel>
-            <select (change)="ScheduleTypeSelect($event)">
-                <option value="1">Daily</option>
-                <option value="2">Week Days</option>
-                <option value="3">Week Ends</option>
-            </select>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="PlaneNumber" placeholder="Plane Number" ngModel>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="BussinessSeatNo" placeholder="Bussiness Seat No" ngModel>
-        </div>
-    
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="EconomySeatNo" placeholder="Economy Seat No" ngModel>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="Prize" placeholder="Prize" ngModel>
-        </div>
-        <div class="ml-2 form-outline mb-4">
-            <input #pwdPassword type="text" name="Rows" placeholder="Rows" ngModel>
-        </div>
-    
-        <div class="ml-2 form-outline mb-4">
-            <label>Select Meal Type</label>
-            <br>
-            <input type="hidden" name="mealType" value="{{mealType}}" ngModel>
-            <select (change)="MealTypeSelect($event)">
-                <option value="0">none</option>
-                <option value="1">veg</option>
-                <option value="2">Non-Veg</option>
-            </select>
-        </div> -->
-    
-    
-    
-        <input class="btn btn-primary btn-block mb-4" type="submit" value="Add">
-        
-    </form>
 </div>
 
+<ng-template #AddSchedule>
+    <div  class="add-airline-container mt-5">
+        <h2 class="text-center">Add Flight</h2>
+    
+        <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="addScheduleFormSubmit(loginForm.value,loginForm)">
+            <div class="form-group">
+                <label class="control-label" for="email">Flight number:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Flight number" name="flightNo" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label" for="airLineName">Aireline Name:</label>
+                <select class = "form-control" name="airLineName"  ngModel> 
+                    <option value="none" selected disabled>Select an Option</option>
+                    <option *ngFor='let i of Airlines' value="{{i.airlineName}}">{{i.airlineName}}</option>                
+                </select>
+            </div> 
+            <div class="form-group">
+                <label class="control-label " for="fromPlace">Departure:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control"  placeholder="Departure" name="fromPlace" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label" for="toPlace">Destination:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control"  placeholder="Destination" name="toPlace" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label" for="StartTime">Start Time:</label>
+                <div class="col-sm-10">
+                  <input type="datetime-local" class="form-control"  placeholder="Start Time" name="StartTime" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label " for="EndTime">End Time:</label>
+                <div class="col-sm-10">
+                  <input type="datetime-local" class="form-control"placeholder="End Time" name="EndTime" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label" for="ScheduledType">Schedule Timing:</label>
+                <select class="form-control" name="ScheduledType" ngModel>
+                    <option value=1>Daily</option>
+                    <option value=2>Week Days</option>
+                    <option value=3>Week Ends</option>          
+                </select>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label " for="PlaneNo">Plane Number:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="PlaneNo" placeholder="Plane Number" name="PlaneNo" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label " for="BussinesSeatNo">Bussiness Seat No:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="BussinesSeatNo" placeholder="Bussiness Seat No" name="BussinesSeatNo" ngModel>
+                </div>
+            </div> 
+            <div class="form-group">
+                <label class="control-label " for="EconomySeatNo">Economy Seat No:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="EconomySeatNo" placeholder="Economy Seat No" name="EconomySeatNo" ngModel>
+                </div>
+            </div> 
+           
+            <div class="form-group">
+                <label class="control-label " for="Prize">Prize:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="Prize" placeholder="Prize" name="TicketPrice" ngModel>
+                </div>
+            </div> 
+           
+            <div class="form-group">
+                <label class="control-label " for="Rows">Rows:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="Rows" placeholder="Rows" name="ToralRows" ngModel>
+                </div>
+            </div> 
+    
+            <div class="form-group">
+                <label class="control-label" for="mealType">Meal Type:</label>
+                <select class="form-control" name="MealType" ngModel>
+                    <option value=0>none</option>
+                    <option value=1>veg</option>
+                    <option value=2>Non-Veg</option>    
+                </select>
+            </div> 
+          
+            <div class="form-group">        
+                <div class="col-sm-offset-2 col-sm-10">
+                  <input type="submit" class="btn btn-primary" value="Add" >
+                </div>
+              </div>
+            
+        </form>
+        <span class="text-success">{{Messsage}}</span>
+    </div>
+</ng-template>
+
+
+
+<ng-template #ListSchedule>
+    <div  *ngIf="ManageScheduleOptions==1;else blockFlight">
+        listing
+    </div>
+
+</ng-template>
+
+<ng-template #blockFlight>
+
+</ng-template>

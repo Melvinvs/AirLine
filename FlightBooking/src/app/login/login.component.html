@@ -5,16 +5,16 @@
         <form #loginForm="ngForm" (ngSubmit)="loginformSubmit(loginForm.value)">
             
             <div class="form-outline mb-4">
-                <input type="text" #txtUserName name="userName" placeholder="User name" ngModel>
+                <input class="form-control" type="text" #txtUserName name="userName" placeholder="User name" ngModel>
             </div>
 
             <div class="form-outline mb-4">
-                <input #pwdPassword type="password" name="password" placeholder="password" ngModel>
+                <input class="form-control" #pwdPassword type="password" name="password" placeholder="password" ngModel>
             </div>
 
-            <div class="row mb-4">
+            <!-- <div class="row mb-4">
                 <div class="col d-flex justify-content-center">
-                  <!-- Checkbox -->
+                 
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
                     <label class="form-check-label" for="form2Example31"> Remember me </label>
@@ -22,10 +22,10 @@
                 </div>
             
                 <div class="col">
-                  <!-- Simple link -->
+                 
                   <a href="#!">Forgot password?</a>
                 </div>
-            </div>
+            </div> -->
 
             <input class="btn btn-primary btn-block mb-4" type="submit" value="Log in">
             <div class="text-center">

@@ -1,81 +1,125 @@
 <div class="user-container">
-    <h2>Search Flights</h2>
+    <nav *ngIf="isLoggedIn==true" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><h2>User Menu</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <div (click)="userOption=$any('SearchFlight')" class="col-3">
+                        Search Flight
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div  (click)="userOption=$any('ManageBooking')" class="col-3">
+                        Manage Booking
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div (click)="userOption=$any('SearchbyPNREmail')" class="col-9">
+                        Search by PNR / Email
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </nav>
 
-    <div class="search-area" >
-        <div >
-            <form class="row " #searchForm="ngForm" (ngSubmit)="searchformSubmit(searchForm.value)">
-                <div class="ml-2 form-outline mb-4">
-                    <input #pwdPassword type="text" name="Departure" placeholder="Departure" ngModel>
-                </div>
-                <div class="ml-2 form-outline mb-4">
-                    <input #pwdPassword type="text" name="Destination" placeholder="Destination" ngModel>
-                </div>
-            
-                <div class="ml-2 form-outline mb-4">
-                    <input  type="date" name="StartTime" placeholder="Start Time" ngModel>
-                </div>
+      <div [ngSwitch]="userOption">
+        <div *ngSwitchCase="'SearchFlight'">
+            <h2>Search Flights</h2>
 
-                <input class="btn btn-primary btn-block mb-4" type="submit" value="search">
-            </form>
+            <div class="search-area" >
+                <div >
+                    <form class="row " #searchForm="ngForm" (ngSubmit)="searchformSubmit(searchForm.value)">
+                        
+                        <div class="ml-2 form-outline mb-4">
+                            <input class="form-control" #pwdPassword type="text" name="Departure" placeholder="Departure" ngModel>
+                        </div>
+                        <div class="ml-2 form-outline mb-4">
+                            <input class="form-control" #pwdPassword type="text" name="Destination" placeholder="Destination" ngModel>
+                        </div>
+                    
+                        <div class="ml-2 form-outline mb-4">
+                            <input class="form-control"  type="date" name="StartTime" placeholder="Start Time" ngModel>
+                        </div>
+
+                        <input class="btn btn-primary btn-block mb-4" type="submit" value="search">
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="flights.length == 0" class="text-center">
+                <h2>No flights to show</h2>
+            </div>
+
+            <div *ngIf="flights.length > 0" class="list-area">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        
+                        <th scope="col">Flight No.</th>
+                        <th scope="col">Airline Name</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">StartTime</th>
+                        <th scope="col">EndTime</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discounted Price</th>
+                        <th *ngIf="isLoggedIn==true" scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    <tr *ngFor="let flight of flights">
+                        <td>
+                            {{flight.flightNo}}
+                        </td>
+                        <td>
+                            {{flight.airLineName}}
+                        </td>
+                        <td>
+                            {{flight.fromPlace}}
+                        </td>
+                        <td>
+                            {{flight.toPlace}}
+                        </td>
+                        <td>
+                            {{flight.startTime|date:'medium'}}
+                        </td>
+                        <td>
+                            {{flight.endTime|date:'medium'}}
+                        </td>
+                        <td>
+                            {{flight.ticketPrice}}
+                        </td>
+                        <td>
+                            {{flight.discount > 0 ? (flight.ticketPrice - (flight.ticketPrice*flight.discount/100)) : flight.ticketPrice}}
+                        </td>
+                        <td *ngIf="isLoggedIn==true">
+                            <button (click)="BooKTicket(flight)" class="btn btn-success">Book</button>
+                        </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div *ngSwitchCase="'ManageBooking'">
+            <app-list-booked-tickets></app-list-booked-tickets>
+        </div>
+        <div *ngSwitchCase="'SearchbyPNREmail'">
+           <app-serarch-by-pnr-email></app-serarch-by-pnr-email>
+        </div>
+        <div *ngSwitchDefault>
+               
         </div>
     </div>
+    
 
-    <div class="list-area">
-
-        <table class="table-list">
-
-            <thead>
-                <th>
-                    Flight No.
-                </th>
-                <th>
-                    Airline Name
-                </th>
-                <th>
-                    From
-                </th>
-                <th>
-                    To
-                </th>
-                <th>
-                    StartTime
-                </th>
-                <th>
-                    EndTime
-                </th>
-                <th>
-                    Price
-                </th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let flight of flights">
-                    <td>
-                        {{flight.flightNo}}
-                    </td>
-                    <td>
-                        {{flight.airLineName}}
-                    </td>
-                    <td>
-                        {{flight.fromPlace}}
-                    </td>
-                    <td>
-                        {{flight.toPlace}}
-                    </td>
-                    <td>
-                        {{flight.startTime|date:'medium'}}
-                    </td>
-                    <td>
-                        {{flight.endTime|date:'medium'}}
-                    </td>
-                    <td>
-                        {{flight.ticketPrice}}
-                    </td>
-                </tr>
-            </tbody>
-                
-            
-        </table>
-
-    </div>
+    
 
 </div>

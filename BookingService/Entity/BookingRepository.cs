@@ -20,7 +20,7 @@ namespace BookingService.Entity
 
         public List<Ticket> GetBookings(string email)
         {
-            return db.Bookings.Where(b => b.Email == email).ToList();
+            return db.Bookings.Where(b => b.Email == email && b.IsCancelled == 0).ToList();
         }
 
         public int GetBookedTickets(Ticket model)
@@ -32,9 +32,9 @@ namespace BookingService.Entity
             ticket.Seattype == model.Seattype);
         }
 
-        public Ticket SearchByPNR(string PNR)
+        public List<Ticket> SearchByPNR(string PNR)
         {
-            return db.Bookings.Where(b => b.PNR == PNR && b.IsCancelled == 0).FirstOrDefault();
+            return db.Bookings.Where(b => b.PNR == PNR && b.IsCancelled == 0).ToList();
         }
 
         public Ticket CancelTicket(string PNR)
@@ -48,20 +48,32 @@ namespace BookingService.Entity
             return obj;
         }
 
-        public bool CancelTicketByFlightID(Ticket model)
+        public bool CancelTicketByAirline(string airlinename)
         {
-            List<Ticket> obj = db.Bookings.Where(f => f.FlightNo == model.FlightNo && f.FromPlace == model.FromPlace && f.StartTime == model.StartTime).ToList();
+            List<Ticket> obj = db.Bookings.Where(f => f.AirLineName== airlinename).ToList();
 
             foreach(var ticket in obj)
             {
                 ticket.IsCancelled = 1;
             }
 
-            //db.Update(obj);
-            db.Bookings.UpdateRange(obj);
+
+            if (obj.Count > 0)
+            {
+                if (obj.Count ==1)
+                    db.Update(obj.First());
+                else
+                    db.Bookings.UpdateRange(obj);
+            }
+            
             db.SaveChanges();
 
             return obj.Count > 0 ? true : false;
+        }
+
+        public List<Ticket> GetAllTicketByUserID(int userId)
+        {
+            return db.Bookings.Where(b => b.CreatedBy == userId).ToList();
         }
     }
 }

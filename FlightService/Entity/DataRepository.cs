@@ -19,32 +19,37 @@ namespace FlightService.Entity
             return model;
         }
 
-        public List<Flight> GetFlights(string from, string to)
+        public List<Flight> GetFlights(string from, string to, DateTime date)
         {
-            List<Flight> flights = db.Flight.Where(d => d.FromPlace.Contains(from) && d.ToPlace.Contains(to) && d.IsBlocked==0).ToList();
+            List<Flight> flights = db.Flight.Where(d => d.FromPlace.Contains(from) && d.ToPlace.Contains(to) && d.IsBlocked==0 && d.StartTime.Date == date.Date).ToList();
             return flights;
         }
 
-        public Flight BlockFlight(int id)
+        public AirLineModel BlockAirline(int id)
         {
-            Flight obj = db.Flight.Where(f => f.Id == id).FirstOrDefault();
+            AirLineModel obj = db.AirLine.Where(f => f.ID == id).FirstOrDefault();
 
-            obj.IsBlocked = 1;
+            obj.IsBlocked = true;
             db.Update(obj);
             db.SaveChanges();
 
             return obj;
         }
 
-        public Flight adddiscount(int id, int value)
+        public bool adddiscount(string name, int value)
         {
-            Flight obj = db.Flight.Where(f => f.Id == id).FirstOrDefault();
+            List<Flight> obj = db.Flight.Where(f => f.AirLineName == name).ToList();
 
-            obj.Discount = value;
-            db.Update(obj);
+            foreach (var flight in obj)
+            {
+                flight.Discount = value;
+            }
+
+            //db.Update(obj);
+            db.Flight.UpdateRange(obj);
             db.SaveChanges();
-
-            return obj;
+            
+            return true;
         }
 
         public bool AddAirLine(AirLineModel model)

@@ -4,14 +4,14 @@ export interface IFlight{
     airLineName:string;
     fromPlace:string;
     toPlace:string;
-    // startTime:string;
-    // endTime:string;
-    ScheduledType:string;
+    StartTime:string;
+    EndTime:string;
+    ScheduledType:number;
     PlaneNo:string;
     BussinesSeatNo:number;
     EconomySeatNo:number;
-    ticketPrice:number;
+    TicketPrice:number;
     ToralRows:number;
     MealType:number;
-
+    Discount:number;
 }

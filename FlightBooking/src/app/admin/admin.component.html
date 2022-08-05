@@ -1,32 +1,49 @@
-<h2 class="admin-head">Admin Menu</h2>
 
-<div class="row col-12"> 
-    <div (click)="adminOption=$any('ManageSchedule')" class="col-3">
-        Manage Schedule
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Admin Menu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <div (click)="adminOption=$any('ManageSchedule')" class="col-3">
+                    Manage Schedule
+                </div>
+            </li>
+            <li class="nav-item">
+                <div  (click)="adminOption=$any('manageDiscount')" class="col-3">
+                    Manage Discount
+                </div>
+            </li>
+            <li class="nav-item">
+                <div (click)="adminOption=$any('manageAirline')" class="col-3">
+                    Manage Airline
+                </div>
+            </li>
+            <li class="nav-item">
+                <div (click)="adminOption=$any('User')" class="col-3">
+                    User Portal
+                </div>
+            </li>
+        </ul>
     </div>
-    <div  (click)="adminOption=$any('manageDiscount')" class="col-3">
-        Manage Discount
-    </div>
-    <div (click)="adminOption=$any('manageAirline')" class="col-3">
-        Manage Airline
-    </div>
-    <div (click)="adminOption=$any('Reports')" class="col-3">
-        Reports
-    </div>
-</div>
+  </nav>
 
 <div [ngSwitch]="adminOption">
     <div *ngSwitchCase="'ManageSchedule'">
         <app-schedule-airline></app-schedule-airline>  
     </div>
     <div *ngSwitchCase="'manageDiscount'">
-        <h3>Manage Discount</h3>        
+       <app-manage-discount></app-manage-discount>
     </div>
     <div *ngSwitchCase="'manageAirline'">
         <app-manage-airline></app-manage-airline>
     </div>
-    <div *ngSwitchCase="'Reports'">
-        <h3>User 2</h3>        
+    <div *ngSwitchCase="'User'">
+        <app-user></app-user>
     </div>
     <div *ngSwitchDefault>
            

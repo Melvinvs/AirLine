@@ -7,11 +7,11 @@ namespace FlightService.Entity
     {
         Flight AddFlight(Flight model);
 
-        List<Flight> GetFlights(string from, string to);
+        List<Flight> GetFlights(string from, string to, DateTime date);
 
-        Flight BlockFlight(int id);
+        AirLineModel BlockAirline(int id);
 
-        Flight adddiscount(int id, int value);
+        bool adddiscount(string name, int value);
 
         bool AddAirLine(AirLineModel model);
 

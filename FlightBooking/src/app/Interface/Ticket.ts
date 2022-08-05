@@ -1,0 +1,23 @@
+export interface ITicket{
+    id:number;
+    flightNo:string;
+    name:string;
+    airLineName:string;
+    fromPlace:string;
+    toPlace:string;
+    startTime:string;
+    endTime:string;
+    ticketPrice:number;
+    mealType:number;
+    seatNo:string;
+    email:string;
+    pnr:string;
+    totalBSeats:number
+    totalESeats:number;
+    seatType:number;
+    isCancelled:number;
+    age:number;
+    gender:string;
+    isBooked:number
+    createdBy:number
+}

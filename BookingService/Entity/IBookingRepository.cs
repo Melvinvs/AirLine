@@ -10,10 +10,12 @@ namespace BookingService.Entity
 
         int GetBookedTickets(Ticket model);
 
-        Ticket SearchByPNR(string PNR);
+        List<Ticket> SearchByPNR(string PNR);
 
         Ticket CancelTicket(string PNR);
 
-        bool CancelTicketByFlightID(Ticket model);
+        bool CancelTicketByAirline(string name);
+
+        List<Ticket> GetAllTicketByUserID(int userId);
     }
 }

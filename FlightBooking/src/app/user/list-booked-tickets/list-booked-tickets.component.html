@@ -1,0 +1,62 @@
+<div *ngIf='tickets.length == 0'>
+    <h2 class="text-center">No data found</h2>
+</div>
+
+
+<div *ngIf='tickets.length > 0'>
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Name</th>
+            <th>PNR</th>
+            <th>Seat No</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Flight No</th>
+            <th>Airline Name</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th>SeatType</th>
+            <th>MealType</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of tickets">
+                <td>{{t.isCancelled == 0?'Booked':'Cancelled'}}</td>
+                <td>{{t.name}}</td>
+                <td>{{t.pnr}}</td>
+                <td>{{t.seatNo}}</td>
+                <td>{{t.email}}</td>
+                <td>
+                    {{t.gender}}
+                </td>
+                <td>{{t.age}}</td>
+                <td>{{t.flightNo}}</td>
+                <td>{{t.airLineName}}</td>
+                <td>{{t.fromPlace}}</td>
+                <td>{{t.toPlace}}</td>
+                <td>{{t.startTime|date:'short'}}</td>
+                <td>{{t.endTime|date:'short'}}</td>
+                <td>
+                    {{t.seatType == 1 ? 'Bussiness' : 'Economy'}}
+                </td>
+                <td>
+                   
+                    {{t.mealType == 0 ? 'None' : t.mealType == 1 ? 'Veg' : 'Non-veg'}}
+                </td>
+                <td>
+                    <button (click)="CancelTicket(t.pnr)" class="btn btn-danger">Cancel</button>
+                    <br>
+                    <button (click)="DownloadPdf(t.pnr)" class="btn btn-primary mt-2">Download</button>
+                </td>
+            </tr>
+          
+        </tbody>
+    </table>
+</div>
+

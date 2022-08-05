@@ -1,28 +1,60 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Airline Menu</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <div class="col-3">
+                  Add Airline
+              </div>
+          </li>
+         
+      </ul>
+  </div>
+</nav>
+
+
 <app-add-airline></app-add-airline>
 
 
-<div>
-    <h3>Airline List</h3>
-
-    <div>
-        <table class="table">
-            <thead>
-              <tr>
+  <div>
+      <h2 class="text-center">Airline List</h2>
+  
+      <div>
+          <table class="table">
+              <thead>
+                <tr>
+                  
+                  <th scope="col">AirLine Name</th>
+                  <th scope="col">Contact Number</th>
+                  <th scope="col">Contact Address</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Satus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i of Airlines">
+                  <td>{{i.airlineName}}</td>
+                  <td>{{i.contactNumber}}</td>
+                  <td>{{i.contactAddress}}</td>
+                  <td>
+                    <button (click)="BlockAirline(i.id)" class="btn btn-danger">Block</button>
+                  </td>
+                  <td>
+                    {{i.isBlocked == true? 'Blocked' : 'Active'}}
+                  </td>
+                </tr>
                 
-                <th scope="col">AirLine Name</th>
-                <th scope="col">Contact Number</th>
-                <th scope="col">Contact Address</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let i of Airlines">
-                <td>{{i.airlineName}}</td>
-                <td>{{i.contactNumber}}</td>
-                <td>{{i.contactAddress}}</td>
-              </tr>
-              
-            </tbody>
-          </table>
-    </div>
-</div>
+              </tbody>
+            </table>
+      </div>
+  </div>
+
+
+
+
 

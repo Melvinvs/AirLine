@@ -1,4 +1,5 @@
 using BookingService.Config;
+using BookingService.Controllers;
 using BookingService.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddConsulConfig();
 
+//using IHost host = Host.CreateDefaultBuilder(args)
+//    .ConfigureServices(services =>
+//    {
+//        services.AddHostedService<QueueListener>();
+//    })
+//    .Build();
+
+//await host.StartAsync();
 
 var app = builder.Build();
 

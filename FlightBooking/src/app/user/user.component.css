@@ -14,3 +14,7 @@ th{
 td{
    border: 3px; 
 }
+
+input{
+    width: 12em;
+}
